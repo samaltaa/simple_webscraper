@@ -15,3 +15,13 @@ for page in range(4):
         }
         # Append each image and title to the empty array
         image_links.append(result)
+
+# download image objects
+for image_object in image_links:
+    # create a new .jpg image file
+    with open(f"./images/{image_object['title']}.jpg", "wb") as file:
+        image = httpx.get(image_object["link"])
+        # save the image binary data into the file
+        file.write(image.content)
+        print(f"Image {image_object['tile']} has been collected")
+
